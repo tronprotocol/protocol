@@ -102,3 +102,8 @@ message DeployContract {
   bytes script = 2;
 }
 
+message WithdrawWitnessPayContract {
+  bytes account_address = 1;
+  int64 time = 2;
+  int64 amount = 3;
+}

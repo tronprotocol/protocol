@@ -150,7 +150,7 @@ service Wallet {
 
   rpc WithdrawWitnessPay (WithdrawWitnessContract) returns (Transaction) {
     option (google.api.http) = {
-      post: "/wallet/withdrawwitnessPay"
+      post: "/wallet/withdrawwitnesspay"
       body: "*"
     };
   }
