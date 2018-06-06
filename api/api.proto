@@ -419,7 +419,8 @@ message BlockReference {
 
 // the api of tron's network such as node list.
 service Network {
-
+	rpc ToDo (EmptyMessage) returns (EmptyMessage) {
+	}
 };
 
 message WitnessList {
