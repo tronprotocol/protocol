@@ -870,6 +870,8 @@ message AccountPaginated {
   Account account = 1;
   int64 offset = 2;
   int64 limit = 3;
+  int64 startTime = 4;
+  int64 endTime = 5;
 }
 message TimePaginatedMessage {
   TimeMessage timeMessage = 1;
