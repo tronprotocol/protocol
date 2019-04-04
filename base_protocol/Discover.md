@@ -170,5 +170,5 @@ Neighbors is the reply to [FindNeighbours].
 [Ping]: #ping-0x01
 [Pong]: #pong-0x02
 [FindNeighbours]: #findneighbours-message-(0x03)
-[Neighbors]: #Neighbors Message (0x04)
+[Neighbors]: #neighbors-message-(0x04)
 
