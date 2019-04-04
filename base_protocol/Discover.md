@@ -165,12 +165,10 @@ message Neighbours {
 }
 ```
 
-Neighbors is the reply to [FindNode].
-
-
-list elements in `packet-data`.
+Neighbors is the reply to [FindNeighbours].
 
 [Ping]: #ping-0x01
 [Pong]: #pong-0x02
 [FindNeighbours]: #findneighbours-message-(0x03)
-[Neighbors]: #neighbors-0x04
+[Neighbors]: #Neighbors Message (0x04)
+
