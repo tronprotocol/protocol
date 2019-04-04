@@ -51,9 +51,7 @@ considered dead, removed and N₁ added to the front of the bucket.
 ## Endpoint Proof
 
 To prevent traffic amplification attacks, implementations must verify that the sender of a
-query participates in the discovery protocol. The sender of a packet is considered
-verified if it has sent a valid pong response with matching ping hash within the last 12
-hours.
+query participates in the discovery protocol. 
 
 ## Recursive Discover
 
@@ -62,7 +60,7 @@ A 'discover' locates the `k` closest nodes to a node ID.
 The discover initiator starts by picking `Kademlia.ALPHA` closest nodes to the target it knows of. 
 The initiator then sends concurrent [FindNeighbours] messages to those nodes. 
 The recursive step, the initiator resends FindNeighbours to nodes it has learned about from previous queries. 
-Of the `k` nodes the initiator has heard of closest to the target, it picks `α` that it has not yet queried and resends [FindNode]
+Of the `k` nodes the initiator has heard of closest to the target, it picks `Kademlia.ALPHA` that it has not yet queried and resends [FindNode]
 to them. Nodes that fail to respond quickly are removed from consideration until and
 unless they do respond.
 
@@ -70,35 +68,6 @@ If a round of FindNode queries fails to return a node any closer than the closes
 seen, the initiator resends the find node to all of the `k` closest nodes it has not
 already queried. The lookup terminates when the initiator has queried and gotten responses
 from the `k` closest nodes it has seen.
-
-## Wire Protocol
-
-Node discovery messages are sent as UDP datagrams. The maximum size of any packet is 1280
-bytes.
-
-```text
-packet = packet-header || packet-data
-```
-
-Every packet starts with a header:
-
-```text
-packet-header = hash || signature || packet-type
-hash = keccak256(signature || packet-type || packet-data)
-signature = sign(packet-type || packet-data)
-```
-
-The `hash` exists to make the packet format recognizable when running multiple protocols
-on the same UDP port. It serves no other purpose.
-
-Every packet is signed by the node's identity key. The `signature` is encoded as a byte
-array of length 65 as the concatenation of the signature values `r`, `s` and the 'recovery
-id' `v`.
-
-The `packet-type` is a single byte defining the type of message. Valid packet types are
-listed below. Data after the header is specific to the packet type and is encoded as an
-RLP list. Implementations should ignore any additional elements in the `packet-data` list
-as well as any extra data after the list.
 
 ### Ping Message (0x01)
 
@@ -167,8 +136,8 @@ message Neighbours {
 
 Neighbors is the reply to [FindNeighbours].
 
-[Ping]: #ping-0x01
-[Pong]: #pong-0x02
+[Ping]: #ping-message-(0x01)
+[Pong]: #pong-message-(0x02)
 [FindNeighbours]: #findneighbours-message-(0x03)
 [Neighbors]: #neighbors-message-(0x04)
 
