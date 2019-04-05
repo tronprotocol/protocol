@@ -3,7 +3,7 @@
 ## Summary
 This document defines the Node Reputate Protocol, a universial calculation of node reputation based on node discovery and node behaviors in the p2p network.
 The reputation of node is used by local node evaluating remote node, it is benefit for local node choosing honest nodes and then communicating wtih them for sync block, broadcast transactions and so no in the future.
-Of course, you can implement a custom reputation by yourself,so the Node Reputate Protocol described by this document can be regard as one specific implement.
+Of course, you can define a differnt protocol and implement a custom reputation system by yourself,so the Node Reputate Protocol described by this document can be regard as one specific implement.
 The current protocol version is 1. 
 
 ## Node Reputation
@@ -31,6 +31,8 @@ INCOMPATIBLE_CHAIN
 SYNC_FAIL
 INCOMPATIBLE_VERSION
 ```
+
+All these situations are disconnect reason attached in tcp messages when node communicating each other.
 
 The node's history score will be cleared as zero if the node has any one of situations listed above.
 
