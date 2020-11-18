@@ -171,7 +171,7 @@ message TransferAssetContract { 
            repeated bytes vote_address = 2;   
            bool support = 3;   
            int32 count = 5; 
-          }   
+         }   
 ```
      A `VoteWitnessContract` contains 4 parameters:  
      `vote_address`: the addresses of those who voted.  
@@ -195,7 +195,7 @@ message TransferAssetContract { 
            bytes owner_address = 1;   
            bytes private_key = 2;   
            bytes url = 12; 
-          }   
+         }   
  ```    
      A `WitnessUpdateContract` contains 2 parameters:  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
@@ -204,7 +204,7 @@ message TransferAssetContract { 
          message WitnessUpdateContract {   
             bytes owner_address = 1;   
             bytes update_url = 12;   
-          }   
+         }   
 ```          
      An `AssetIssueContract` contains 11 parameters:  
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
@@ -229,7 +229,7 @@ message TransferAssetContract { 
            int32 vote_score = 16;   
            bytes description = 20;   
            bytes url = 21; 
-          }   
+         }   
 ```          
      A `ParticipateAssetIssueContract` contains 4 parameters:  
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
@@ -242,7 +242,7 @@ message TransferAssetContract { 
            bytes to_address = 2;   
            bytes asset_name = 3;    
            int64 amount = 4;    
-          }   
+         }   
 ```            
      A `DeployContract` contains 2 parameters:  
      `script`: the script of this contract.  
@@ -281,36 +281,36 @@ Input, transaction and head block all require signature.
           enum TranscationType {     
             UtxoType = 0;     
             ContractType = 1;   
-           }   
-           message Contract {     
-             enum ContractType {       
-               AccountCreateContract = 0;       
-               TransferContract = 1;       
-               TransferAssetContract = 2;       
-               VoteAssetContract = 3;       
-               VoteWitnessContract = 4;       
-               WitnessCreateContract = 5;       
-               AssetIssueContract = 6;       
-               DeployContract = 7; 
-               WitnessUpdateContract = 8;
-               ParticipateAssetIssueContract = 9    
-              }     
-              ContractType type = 1;     
-              google.protobuf.Any parameter = 2;   
-            }   
-            message raw {     
-              TranscationType type = 2;     
-              repeated TXInput vin = 5;     
-              repeated TXOutput vout = 7;     
-              int64 expiration = 8;     
-              bytes data = 10;     
-              repeated Contract contract = 11;     
-              bytes scripts = 16;   
-              int64 timestamp = 17;
-             }   
-             raw raw_data = 1;   
-             repeated bytes signature = 5;
-         }   
+          }   
+          message Contract {     
+            enum ContractType {       
+              AccountCreateContract = 0;       
+              TransferContract = 1;       
+              TransferAssetContract = 2;       
+              VoteAssetContract = 3;       
+              VoteWitnessContract = 4;       
+              WitnessCreateContract = 5;       
+              AssetIssueContract = 6;       
+              DeployContract = 7; 
+              WitnessUpdateContract = 8;
+              ParticipateAssetIssueContract = 9    
+            }     
+            ContractType type = 1;     
+            google.protobuf.Any parameter = 2;   
+          }   
+          message raw {     
+            TranscationType type = 2;     
+            repeated TXInput vin = 5;     
+            repeated TXOutput vout = 7;     
+            int64 expiration = 8;     
+            bytes data = 10;     
+            repeated Contract contract = 11;     
+            bytes scripts = 16;   
+            int64 timestamp = 17;
+          }   
+          raw raw_data = 1;   
+          repeated bytes signature = 5;
+        }   
 ```
     message `TXOutputs` contains `outputs`.  
     `outputs`: an array of `TXOutput`.  
@@ -338,14 +338,15 @@ Input, transaction and head block all require signature.
     `pubKey`: public key.
 ```protobuf 
         message TXInput {   
-           message raw {     
-           bytes txID = 1;     
-           int64 vout = 2;     
-           bytes pubKey = 3;   
-         }   
-         raw raw_data = 1;   
-         bytes signature = 4;
-         }   
+
+          message raw {     
+            bytes txID = 1;     
+            int64 vout = 2;     
+            bytes pubKey = 3;   
+          }   
+          raw raw_data = 1;   
+          bytes signature = 4;
+        }   
 ```
      message `Result` contains `fee` and `ret`.  
      `ret`: the state of transaction.  
@@ -377,10 +378,10 @@ Input, transaction and head block all require signature.
           enum InventoryType {     
             TRX = 0;     
             BLOCK = 1;   
-           }   
-           InventoryType type = 1;   
-           repeated bytes ids = 2; 
-         }   
+          }   
+          InventoryType type = 1;   
+          repeated bytes ids = 2; 
+        }   
 ```
     message `Items` contains 4 parameters:  
     `type`: type of items – e.g. _1_ stands for `TRX`.  
@@ -438,15 +439,15 @@ Input, transaction and head block all require signature.
      `ids` contains 2 paremeters:  
      `hash`: the hash of block.  
      `number`: the hash and height of block.
-      
+
+```protobuf       
          message BlockId {   
             bytes hash = 1;   
             int64 number = 2;   
           }   
           repeated BlockId ids = 1;   
           Type type = 2;   
-         }   
-     
+  ```   
      `ReasonCode`: the type of reason. 
     
      `ReasonCode` contains 15 types of disconnect reasons:  
@@ -465,7 +466,8 @@ Input, transaction and head block all require signature.
      `USER_REASON`  
      `RESET`  
      `UNKNOWN` 
-      
+     
+```protobuf      
         enum ReasonCode {   
           REQUESTED = 0;   
           TCP_ERROR = 1;   
@@ -483,7 +485,7 @@ Input, transaction and head block all require signature.
           RESET = 16;   
           UNKNOWN = 255;   
         }   
-      
+ ```     
      message`DisconnectMessage` contains `reason`.  
      `DisconnectMessage`: the message when disconnection occurs.  
      `reason`: the reason for disconnecting.
@@ -492,8 +494,7 @@ Input, transaction and head block all require signature.
      `HelloMessage`: the message for building connection.  
      `from`: the nodes that request for building connection.  
      `version`: the version when connection is built.
-      
-      
+     
       
 +	Wallet Service RPC and blockchain explorer
         
