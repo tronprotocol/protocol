@@ -338,6 +338,7 @@ Input, transaction and head block all require signature.
     `pubKey`: public key.
 ```protobuf 
         message TXInput {   
+
           message raw {     
             bytes txID = 1;     
             int64 vout = 2;     
@@ -438,14 +439,14 @@ Input, transaction and head block all require signature.
      `ids` contains 2 paremeters:  
      `hash`: the hash of block.  
      `number`: the hash and height of block.
- ```protobuf       
+
+```protobuf       
          message BlockId {   
             bytes hash = 1;   
             int64 number = 2;   
           }   
           repeated BlockId ids = 1;   
           Type type = 2;   
-         }   
   ```   
      `ReasonCode`: the type of reason. 
     
@@ -465,7 +466,8 @@ Input, transaction and head block all require signature.
      `USER_REASON`  
      `RESET`  
      `UNKNOWN` 
-  ```protobuf      
+     
+```protobuf      
         enum ReasonCode {   
           REQUESTED = 0;   
           TCP_ERROR = 1;   
@@ -492,8 +494,7 @@ Input, transaction and head block all require signature.
      `HelloMessage`: the message for building connection.  
      `from`: the nodes that request for building connection.  
      `version`: the version when connection is built.
-      
-      
+     
       
 +	Wallet Service RPC and blockchain explorer
         
