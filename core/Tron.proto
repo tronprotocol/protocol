@@ -5,7 +5,6 @@ import "core/Discover.proto";
 
 package protocol;
 
-
 option java_package = "org.tron.protos"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "Protocol"; //Specify the class name of the generated Java file
 option go_package = "github.com/tronprotocol/grpc-gateway/core";
@@ -78,7 +77,6 @@ message MarketOrder {
       CANCELED = 2;
     }
     State state = 11;
-
     bytes prev = 12;
     bytes next = 13;
 }
@@ -145,10 +143,8 @@ message Account {
   repeated Vote votes = 5;
   // the other asset owned by this account
   map<string, int64> asset = 6;
-
   // the other asset owned by this account，key is assetId
   map<string, int64> assetV2 = 56;
-
   // the frozen balance for bandwidth
   repeated Frozen frozen = 7;
   // bandwidth, get from frozen
@@ -157,7 +153,6 @@ message Account {
   int64 acquired_delegated_frozen_balance_for_bandwidth = 41;
   //Freeze and provide balances to other accounts
   int64 delegated_frozen_balance_for_bandwidth = 42;
-
   // this account create time
   int64 create_time = 0x09;
   // this last operation time, including transfer, voting and so on. //FIXME fix grammar
@@ -182,7 +177,6 @@ message Account {
   map<string, int64> free_asset_net_usageV2 = 59;
   int64 latest_consume_time = 21;
   int64 latest_consume_free_time = 22;
-
   // the identity of this account, case insensitive
   bytes account_id = 23;
 
@@ -192,17 +186,14 @@ message Account {
     // the frozen balance for energy
     Frozen frozen_balance_for_energy = 2;
     int64 latest_consume_time_for_energy = 3;
-
     //Frozen balance provided by other accounts to this account
     int64 acquired_delegated_frozen_balance_for_energy = 4;
     //Frozen balances provided to other accounts
     int64 delegated_frozen_balance_for_energy = 5;
-
     // storage resource, get from market
     int64 storage_limit = 6;
     int64 storage_usage = 7;
     int64 latest_exchange_storage_time = 8;
-
   }
   AccountResource account_resource = 26;
   bytes codeHash = 30;
@@ -210,7 +201,6 @@ message Account {
   Permission witness_permission = 32;
   repeated Permission active_permission = 33;
 }
-
 
 message Key {
   bytes address = 1;
@@ -267,7 +257,6 @@ message Votes {
 }
 
 // Transcation
-
 message TXOutput {
   int64 value = 1;
   bytes pubKeyHash = 2;
@@ -375,7 +364,6 @@ message Transaction {
     int64 fee = 1;
     code ret = 2;
     contractResult contractRet = 3;
-
     string assetIssueID = 14;
     int64 withdraw_amount = 15;
     int64 unfreeze_amount = 16;
@@ -384,8 +372,6 @@ message Transaction {
     int64 exchange_withdraw_another_amount = 20;
     int64 exchange_id = 21;
     int64 shielded_transaction_fee = 22;
-
-
     bytes orderId = 25;
     repeated MarketOrderDetail orderDetails = 26;
   }
@@ -417,6 +403,7 @@ message TransactionInfo {
     SUCESS = 0;
     FAILED = 1;
   }
+  
   message Log {
     bytes address = 1;
     repeated bytes topics = 2;
@@ -432,7 +419,6 @@ message TransactionInfo {
   repeated Log log = 8;
   code result = 9;
   bytes resMessage = 10;
-
   string assetIssueID = 14;
   int64 withdraw_amount = 15;
   int64 unfreeze_amount = 16;
@@ -442,10 +428,8 @@ message TransactionInfo {
   int64 exchange_withdraw_another_amount = 20;
   int64 exchange_id = 21;
   int64 shielded_transaction_fee = 22;
-
   bytes orderId = 25;
   repeated MarketOrderDetail orderDetails = 26;
-
 }
 
 message TransactionRet {
@@ -527,7 +511,6 @@ message Items {
     BLOCK = 2;
     BLOCKHEADER = 3;
   }
-
   ItemType type = 1;
   repeated Block blocks = 2;
   repeated BlockHeader block_headers = 3;
@@ -575,7 +558,6 @@ message HelloMessage {
     bytes hash = 1;
     int64 number = 2;
   }
-
   Endpoint from = 1;
   int32 version = 2;
   int64 timestamp = 3;
@@ -826,6 +808,7 @@ message PBFTMessage {
     BLOCK = 0;
     SRL = 1;
   }
+  
   message Raw {
     MsgType msg_type = 1;
     DataType data_type = 2;
