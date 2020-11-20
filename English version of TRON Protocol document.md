@@ -12,10 +12,8 @@ enum AccountType { 
   Normal = 0;   
   AssetIssue = 1;   
   Contract = 2; 
- }
+}   
 ```
-      
-
      An `Account` contains 7 parameters:  
      `account_name`: the name for this account – e.g. “_BillsAccount_”.  
      `type`: what type of this account is – e.g. _0_ stands for type `Normal`.  
@@ -36,7 +34,7 @@ message Account { 
     repeated Vote votes = 5;   
     map<string, int64> asset = 6;
     int64 latest_operation_time = 10; 
-}
+}   
 ```       
      A `Witness` contains 8 parameters:  
       `address`: the address of this witness – e.g. “_0xu82h…7237_”.  
@@ -58,7 +56,7 @@ message Witness{ 
   int64 totalMissed = 6;   
   int64 latestBlockNum = 7; 
   bool isJobs = 9;
-}
+}   
 ```
 +	A block typically contains transaction data and a blockheader, which is a list of basic block information, including timestamp, signature, parent hash, root of Merkle tree and so on.
 
@@ -70,7 +68,7 @@ message Witness{ 
 message Block { 
   repeated Transaction transactions = 1; 
   BlockHeader block_header = 2; 
-}
+} 
 ```
      A `BlockHeader` contains `raw_data` and `witness_signature`.  
      `raw_data`: a `raw` message.  
@@ -97,7 +95,7 @@ message BlockHeader { 
   } 
   raw raw_data = 1; 
   bytes witness_signature = 2; 
-}
+} 
 ```
      message `ChainInventory` contains `BlockId` and `remain_num`.  
      `BlockId`: the identification of block.  
@@ -107,14 +105,14 @@ message BlockHeader { 
      `hash`: the hash of block.  
      `number`: the hash and height of block.
 ```protobuf      
-message ChainInventory {
-  message BlockId {
-    bytes hash = 1;
-    int64 number = 2;
-  }
-  repeated BlockId ids = 1;
-  int64 remain_num = 2;
-}
+message ChainInventory { 
+  message BlockId { 
+    bytes hash = 1; 
+    int64 number = 2; 
+  } 
+  repeated BlockId ids = 1; 
+  int64 remain_num = 2; 
+} 
 ```       
 +	Transaction contracts mainly includes account create contract, account update contract transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
 
@@ -127,16 +125,16 @@ message AccountCreateContract { 
   AccountType type = 1;   
   bytes account_name = 2;   
   bytes owner_address = 3; 
-}
+}   
 ```          
      A `AccountUpdateContract` contains 2 paremeters:  
      `account_name`: the name for this account – e.g.”_Billsaccount_”.  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 ```protobuf     
-message AccountUpdateContract {
-  bytes account_name = 1;
-  bytes owner_address = 2;
-}
+message AccountUpdateContract { 
+  bytes account_name = 1; 
+  bytes owner_address = 2; 
+} 
 ```    
      A `TransferContract` contains 3 parameters:  
      `amount`: the amount of TRX – e.g. _12534_.  
@@ -147,7 +145,7 @@ message TransferContract { 
   bytes owner_address = 1;   
   bytes to_address = 2;   
   int64 amount = 3;
-}
+}   
 ```
      A `TransferAssetContract` contains 4 parameters:  
      `asset_name`: the name for asset – e.g.”_Billsaccount_”.  
@@ -160,7 +158,7 @@ message TransferAssetContract { 
   bytes owner_address = 2;   
   bytes to_address = 3;   
   int64 amount = 4; 
-}
+}   
 ```
      A `VoteAssetContract` contains 4 parameters:  
      `vote_address`: the voted address of the asset.  
@@ -173,41 +171,41 @@ message TransferAssetContract { 
            repeated bytes vote_address = 2;   
            bool support = 3;   
            int32 count = 5; 
-          }
+          }   
 ```
      A `VoteWitnessContract` contains 4 parameters:  
      `vote_address`: the addresses of those who voted.  
      `support`: is the votes supportive or not - e.g. _true_.  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
      `count`: - e.g. the count number of vote – e.g. _32632_.
-
+```protobuf 
          message VoteWitnessContract {   
            bytes owner_address = 1;   
            repeated bytes vote_address = 2;   
            bool support = 3;   
-           int32 count = 5;
-           }
-
+           int32 count = 5;   
+         }   
+```
      A `WitnessCreateContract` contains 3 parameters:  
      `private_key`: the private key of contract– e.g. “_0xu82h…7237_”.  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
      `url`: the url for the witness – e.g. “_https://www.noonetrust.com_”.
-
+```protobuf 
          message WitnessCreateContract {   
            bytes owner_address = 1;   
            bytes private_key = 2;   
            bytes url = 12; 
-          }
-     
+          }   
+ ```    
      A `WitnessUpdateContract` contains 2 parameters:  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
      `update_url`: the url for the witness – e.g. “_https://www.noonetrust.com_”. 
-     
-         message WitnessUpdateContract {
-            bytes owner_address = 1;
-            bytes update_url = 12;
-          }
-          
+```protobuf      
+         message WitnessUpdateContract {   
+            bytes owner_address = 1;   
+            bytes update_url = 12;   
+          }   
+```          
      An `AssetIssueContract` contains 11 parameters:  
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
      `name`: the name for this contract – e.g. “Billscontract”.  
@@ -219,7 +217,7 @@ message TransferAssetContract { 
      `vote_score`: the vote score of this contract received – e.g. _12343_.  
      `description`: the description of this contract – e.g.”_trondada_”.  
      `url`: the url of this contract – e.g. “_https://www.noonetrust.com_”.
-
+```protobuf 
          message AssetIssueContract {   
            bytes owner_address = 1;   
            bytes name = 2;   
@@ -231,30 +229,30 @@ message TransferAssetContract { 
            int32 vote_score = 16;   
            bytes description = 20;   
            bytes url = 21; 
-          }
-          
+          }   
+```          
      A `ParticipateAssetIssueContract` contains 4 parameters:  
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
      `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
      `asset_name`: the name of target asset.  
      `amount`: the amount of drops.
-     
-         message ParticipateAssetIssueContract {
-           bytes owner_address = 1;
-           bytes to_address = 2;
-           bytes asset_name = 3; 
-           int64 amount = 4; 
-          }
-          
+```protobuf      
+         message ParticipateAssetIssueContract {   
+           bytes owner_address = 1;   
+           bytes to_address = 2;   
+           bytes asset_name = 3;    
+           int64 amount = 4;    
+          }   
+```            
      A `DeployContract` contains 2 parameters:  
      `script`: the script of this contract.  
      `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”. 
-
+```protobuf 
          message DeployContract {   
            bytes owner_address = 1;   
            bytes script = 2;
-           }                       t
-
+         }                          t
+```
 +	Each transaction contains several TXInputs, TXOutputs and other related qualities.
 Input, transaction and head block all require signature.
 
@@ -278,7 +276,7 @@ Input, transaction and head block all require signature.
 
     There are 8 different of contract types: `AccountCreateContract`, `TransferContract`, `TransferAssetContract`, `VoteAssetContract`, `VoteWitnessContract`,`WitnessCreateContract`, `AssetIssueContract` and `DeployContract`.  
     `TransactionType` have two types: `UtxoType` and `ContractType`.
-
+```protobuf 
         message Transaction {   
           enum TranscationType {     
             UtxoType = 0;     
@@ -312,24 +310,24 @@ Input, transaction and head block all require signature.
              }   
              raw raw_data = 1;   
              repeated bytes signature = 5;
-          }
-
+         }   
+```
     message `TXOutputs` contains `outputs`.  
     `outputs`: an array of `TXOutput`.  
-
+```protobuf 
         message TXOutputs {   
            repeated TXOutput outputs = 1; 
-         }
-
+        }   
+```
     message `TXOutput` contains `value` and `pubKeyHash`.  
     `value`: output value.  
     `pubKeyHash`: Hash of public key
-
+```protobuf 
         message TXOutput {   
            int64 value = 1;   
            bytes pubKeyHash = 2; 
-         }
-
+        }   
+```
     message `TXInput` contains `raw_data` and `signature`.  
     `raw_data`: a message `raw`.  
     `signature`: signature for this `TXInput`.
@@ -338,7 +336,7 @@ Input, transaction and head block all require signature.
     `txID`: transaction ID.  
     `vout`: value of last output.  
     `pubKey`: public key.
-
+```protobuf 
         message TXInput {   
            message raw {     
            bytes txID = 1;     
@@ -347,23 +345,23 @@ Input, transaction and head block all require signature.
          }   
          raw raw_data = 1;   
          bytes signature = 4;
-          }
-       
+         }   
+```
      message `Result` contains `fee` and `ret`.  
      `ret`: the state of transaction.  
      `fee`: the fee for transaction.
     
      `code` is definition of `ret` and contains 2 types：`SUCCESS` and `FAILED`.
-     
-        message Result {
-          enum code {
-            SUCESS = 0;
-            FAILED = 1;
-          }
-          int64 fee = 1;
-          code ret = 2;
-        }
-     
+```protobuf      
+        message Result {   
+          enum code {   
+            SUCESS = 0;   
+            FAILED = 1;   
+          }   
+          int64 fee = 1;   
+          code ret = 2;   
+        }   
+```     
 +	Inventory is mainly used to inform peer nodes the list of items.  
 
     `Inventory` contains `type` and `ids`.  
@@ -373,7 +371,7 @@ Input, transaction and head block all require signature.
     Two `Inventory` types: `TRX` and `BLOCK`.  
     `TRX`: transaction.  
     `BLOCK`: block.
-
+```protobuf 
         // Inventory 
         message Inventory {   
           enum InventoryType {     
@@ -382,8 +380,8 @@ Input, transaction and head block all require signature.
            }   
            InventoryType type = 1;   
            repeated bytes ids = 2; 
-         }
-
+         }   
+```
     message `Items` contains 4 parameters:  
     `type`: type of items – e.g. _1_ stands for `TRX`.  
     `blocks`: blocks in `Items` if there is any.  
@@ -395,7 +393,7 @@ Input, transaction and head block all require signature.
     `TRX`: transaction.  
     `BLOCK`: block.  
     `BLOCKHEADER`: block header.
-
+```protobuf 
         message Items {   
           enum ItemType {     
             ERR = 0;     
@@ -408,30 +406,31 @@ Input, transaction and head block all require signature.
            repeated BlockHeader 
            block_headers = 3;   
            repeated Transaction transactions = 4;
-         }
-
+         }   
+```
     `InventoryItems` contains `type` and `items`.  
     `type`: what type of item.  
     `items`: items in an `InventoryItems`.
-
+```protobuf 
         message InventoryItems {   
           int32 type = 1;   
           repeated bytes items = 2;
-          }
-
+        }   
+```
     message `BlockInventory` contains `type`.  
     `type`: what type of inventory.
     
     There are 3 types:`SYNC`, `ADVTISE`, `FETCH`.
-    
-        // Inventory
-         message BlockInventory {
-           enum Type {
-             SYNC = 0;
-             ADVTISE = 1;
-             FETCH = 2;
-           }
-    
+```protobuf     
+        // Inventory   
+         message BlockInventory {   
+           enum Type {   
+             SYNC = 0;   
+             ADVTISE = 1;   
+             FETCH = 2;   
+           }   
+         }   
+```    
      message `BlockId` contains `ids` and `type`.  
      `ids`: the identification of block.  
      `type`: what type of the block.
@@ -440,13 +439,13 @@ Input, transaction and head block all require signature.
      `hash`: the hash of block.  
      `number`: the hash and height of block.
       
-         message BlockId {
-            bytes hash = 1;
-            int64 number = 2;
-          }
-          repeated BlockId ids = 1;
-          Type type = 2;
-         }
+         message BlockId {   
+            bytes hash = 1;   
+            int64 number = 2;   
+          }   
+          repeated BlockId ids = 1;   
+          Type type = 2;   
+         }   
      
      `ReasonCode`: the type of reason. 
     
@@ -467,23 +466,23 @@ Input, transaction and head block all require signature.
      `RESET`  
      `UNKNOWN` 
       
-        enum ReasonCode {
-          REQUESTED = 0;
-          TCP_ERROR = 1;
-          BAD_PROTOCOL = 2;
-          USELESS_PEER = 3;
-          TOO_MANY_PEERS = 4;
-          DUPLICATE_PEER = 5;
-          INCOMPATIBLE_PROTOCOL = 6;
-          NULL_IDENTITY = 7;
-          PEER_QUITING = 8;
-          UNEXPECTED_IDENTITY = 9;
-          LOCAL_IDENTITY = 10;
-          PING_TIMEOUT = 11;
-          USER_REASON = 12;
-          RESET = 16;
-          UNKNOWN = 255;
-        }
+        enum ReasonCode {   
+          REQUESTED = 0;   
+          TCP_ERROR = 1;   
+          BAD_PROTOCOL = 2;   
+          USELESS_PEER = 3;   
+          TOO_MANY_PEERS = 4;   
+          DUPLICATE_PEER = 5;   
+          INCOMPATIBLE_PROTOCOL = 6;   
+          NULL_IDENTITY = 7;   
+          PEER_QUITING = 8;   
+          UNEXPECTED_IDENTITY = 9;   
+          LOCAL_IDENTITY = 10;   
+          PING_TIMEOUT = 11;   
+          USER_REASON = 12;   
+          RESET = 16;   
+          UNKNOWN = 255;   
+        }   
       
      message`DisconnectMessage` contains `reason`.  
      `DisconnectMessage`: the message when disconnection occurs.  
@@ -539,133 +538,119 @@ Input, transaction and head block all require signature.
     Get block by block number.  
     __`TotalTransaction`__:  
     Check out the total transaction.
-   
-      service Wallet {
+```protobuf    
+      service Wallet {   
       
-        rpc GetAccount (Account) returns (Account) {
+        rpc GetAccount (Account) returns (Account) {   
+        };   
       
-        };
+        rpc CreateTransaction (TransferContract) returns (Transaction) {   
+        };   
       
-        rpc CreateTransaction (TransferContract) returns (Transaction) {
+        rpc BroadcastTransaction (Transaction) returns (Return) {   
+        };   
       
-        };
+        rpc ListAccounts (EmptyMessage) returns (AccountList) {   
+        };   
       
-        rpc BroadcastTransaction (Transaction) returns (Return) {
+        rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {   
+        };   
       
-        };
+        rpc CreateAccount (AccountCreateContract) returns (Transaction) {   
+        };   
       
-        rpc ListAccounts (EmptyMessage) returns (AccountList) {
+        rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {   
+        };   
       
-        };
+        rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {   
+        };   
       
-        rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {
+        rpc ListWitnesses (EmptyMessage) returns (WitnessList) {   
+        };   
       
-        };
+        rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {   
+        };   
       
-        rpc CreateAccount (AccountCreateContract) returns (Transaction) {
+        rpc CreateWitness (WitnessCreateContract) returns (Transaction) {   
+        };   
       
-        };
+        rpc TransferAsset (TransferAssetContract) returns (Transaction) {   
+        }   
       
-        rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {
+        rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {   
+        }   
       
-        };
-      
-        rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {
-      
-        };
-      
-        rpc ListWitnesses (EmptyMessage) returns (WitnessList) {
-      
-        };
-      
-        rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {
-      
-        };
-      
-        rpc CreateWitness (WitnessCreateContract) returns (Transaction) {
-      
-        };
-      
-        rpc TransferAsset (TransferAssetContract) returns (Transaction) {
-      
-        }
-      
-        rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {
-      
-        }
-      
-        rpc ListNodes (EmptyMessage) returns (NodeList) {
-      
-        }
-        rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {
-      
-        }
-        rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {
-      
-        }
-        rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {
-      
-        }
-        rpc GetNowBlock (EmptyMessage) returns (Block) {
-      
-        }
-        rpc GetBlockByNum (NumberMessage) returns (Block) {
-      
-        }
-        rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {
-      
-        }
-      };
-   
+        rpc ListNodes (EmptyMessage) returns (NodeList) {   
+        }   
+        
+        rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {   
+        }   
+        
+        rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {   
+        }   
+        
+        rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {   
+        }   
+        
+        rpc GetNowBlock (EmptyMessage) returns (Block) {   
+        }   
+        
+        rpc GetBlockByNum (NumberMessage) returns (Block) {   
+        }   
+        
+        rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {   
+        }   
+      };   
+```   
    `AccountList`: the list of acounts in the blockchain explorer.  
    message `AccountList` contains one parameter:  
    `account`:
-   
-       message AccountList {
-         repeated Account accounts = 1;
-       }
-       
+ ```protobuf    
+       message AccountList {   
+         repeated Account accounts = 1;   
+       }   
+```       
    `WitnessList`: the list of witnesses in the blockchain explorer.  
    message `WitnessList` contains one parameter:  
    `witnesses`:
-   
-        message WitnessList {
-          repeated Witness witnesses = 1;
-        }
-        
+```protobuf    
+        message WitnessList {   
+          repeated Witness witnesses = 1;   
+        }   
+```        
    `AssetIssueList`: the list of issue asset in the blockchain explorer.  
    message `AssetIssueList` contains one parameter:  
    `assetIssue`:
-   
-        message AssetIssueList {
-          repeated AssetIssueContract assetIssue = 1;
-        }
-   
+```protobuf     
+        message AssetIssueList {   
+          repeated AssetIssueContract assetIssue = 1;   
+        }   
+```   
    `NodeList`: the list of nodes in the node distribution map.  
    message `NodeList` contains one parameter:  
    `nodes`:
-   
-         message NodeList {
-           repeated Node nodes = 1;
-         }
-   
+```protobuf     
+         message NodeList {   
+           repeated Node nodes = 1;   
+         }   
+```   
    `Address`: the address  of nodes.  
    message`Address` contains 2 parameters:  
    `host`: the host of nodes.  
    `port`: the port number of nodes.
-   
-          message Address {
-            bytes host = 1;
-            int32 port = 2;
-          }
-               
+```protobuf     
+          message Address {   
+            bytes host = 1;   
+            int32 port = 2;   
+          }   
+```               
    message `Return` has only one parameter:  
     `result`: a bool flag.  
-   
+```protobuf     
           message `Return` {   
-            bool result = 1;
-           }
-
+            bool result = 1;   
+          }   
+```
 + The message structure of UDP.
 
   `Endpoint`: the storage structure of nodes' information.  
@@ -673,64 +658,62 @@ Input, transaction and head block all require signature.
   `address`: the address of nodes.  
   `port`: the port number.  
   `nodeId`:the ID of nodes.
-   
-   
-      message Endpoint {
-         bytes address = 1;
-         int32 port = 2;
-         bytes nodeId = 3;
-       }
-   
+```protobuf     
+      message Endpoint {   
+        bytes address = 1;   
+        int32 port = 2;   
+        bytes nodeId = 3;   
+      }   
+```   
    `PingMessage`: the message sent from one node to another in the connecting process.  
    message`PingMessage` contains 4 parameters:  
    `from`: which node does the message send from.  
    `to`: which node will the message send to.  
    `version`: the version of the Internet.  
    `timestamp`: the timestamp of message.
-   
-       message PingMessage {
-          Endpoint from = 1;
-          Endpoint to = 2;
-         int32 version = 3;
-         int64 timestamp = 4;
-        }
-   
+```protobuf     
+       message PingMessage {   
+         Endpoint from = 1;   
+         Endpoint to = 2;   
+         int32 version = 3;   
+         int64 timestamp = 4;   
+       }   
+```   
    `PongMessage`: the message implies that nodes are connected.  
    message`PongMessage` contains 3 parameters:  
    `from`: which node does the message send from.  
    `echo`:  
    `timestamp`: the timestamp of message.
-
-        message PongMessage {
-          Endpoint from = 1;
-          int32 echo = 2;
-          int64 timestamp = 3;
-         }
-   
+```protobuf  
+        message PongMessage {   
+          Endpoint from = 1;   
+          int32 echo = 2;   
+          int64 timestamp = 3;   
+        }   
+```   
    `FindNeighbours`: the message sent from one node to find another one.  
    message`FindNeighbours` contains 3 parameters:  
    `from`: which node does the message send from.  
    `targetId`: the ID of targeted node.  
    `timestamp`: the timestamp of message. 
-    
-        message FindNeighbours {
-          Endpoint from = 1;
-          bytes targetId = 2;
-          int64 timestamp = 3;
-         }
-  
+```protobuf      
+        message FindNeighbours {   
+          Endpoint from = 1;   
+          bytes targetId = 2;   
+          int64 timestamp = 3;   
+        }   
+```  
    `FindNeighbour`: the message replied by the neighbour node.  
     message`Neighbours` contains 3 parameters:  
     `from`: which node does the message send from.    
     `neighbours`: the neighbour node.  
     `timestamp`: the timestamp of message.
-
-        message Neighbours {
-          Endpoint from = 1;
-          repeated Endpoint neighbours = 2;
-          int64 timestamp = 3;
-         }
-
-
+```protobuf  
+        message Neighbours {   
+          Endpoint from = 1;   
+          repeated Endpoint neighbours = 2;   
+          int64 timestamp = 3;   
+        }   
+```
 
 # Please check detailed protocol document that may change with the iteration of the program at any time. Please refer to the latest version.
