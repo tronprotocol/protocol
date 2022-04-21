@@ -74,7 +74,6 @@ service Wallet {
     };
   };
 
-
   rpc SetAccountId (SetAccountIdContract) returns (Transaction) {
     option (google.api.http) = {
       post: "/wallet/setaccountid"
@@ -429,7 +428,6 @@ service Wallet {
     };
   };
 
-
   rpc GetDelegatedResource (DelegatedResourceMessage) returns (DelegatedResourceList) {
   };
 
@@ -624,15 +622,12 @@ service Wallet {
   }
 
   rpc AddSign (TransactionSign) returns (TransactionExtention) {
-
   }
 
   rpc GetTransactionSignWeight (Transaction) returns (TransactionSignWeight) {
-
   }
 
   rpc GetTransactionApprovedList (Transaction) returns (TransactionApprovedList) {
-
   }
 
   rpc GetNodeInfo (EmptyMessage) returns (NodeInfo) {
@@ -645,7 +640,6 @@ service Wallet {
   };
 
   rpc UpdateBrokerage (UpdateBrokerageContract) returns (TransactionExtention) {
-
   };
 
   // for shiededTransaction
@@ -906,16 +900,15 @@ service WalletExtension {
 service Database {
   // for tapos
   rpc getBlockReference (EmptyMessage) returns (BlockReference) {
-
   }
+  
   rpc GetDynamicProperties (EmptyMessage) returns (DynamicProperties) {
-
   }
+  
   rpc GetNowBlock (EmptyMessage) returns (Block) {
-
   }
+  
   rpc GetBlockByNum (NumberMessage) returns (Block) {
-
   }
 };
 
