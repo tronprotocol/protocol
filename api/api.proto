@@ -12,8 +12,10 @@ import "core/contract/proposal_contract.proto";
 import "core/contract/storage_contract.proto";
 import "core/contract/exchange_contract.proto";
 import "core/contract/market_contract.proto";
+import "core/contract/oracle_contract.proto";
 import "core/contract/smart_contract.proto";
 import "core/contract/shield_contract.proto";
+import "core/contract/stable_market_contract.proto";
 
 option java_package = "org.tron.api"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "GrpcAPI"; //Specify the class name of the generated Java file
@@ -42,7 +44,7 @@ service Wallet {
   };
 
   rpc GetAccountBalance (AccountBalanceRequest) returns (AccountBalanceResponse) {
-        option (google.api.http) = {
+    option (google.api.http) = {
       post: "/wallet/getaccountbalance"
       body: "*"
       additional_bindings {
@@ -687,6 +689,9 @@ service Wallet {
   rpc GetRewardInfo (BytesMessage) returns (NumberMessage) {
   };
 
+  rpc GetOracleRewardInfo (BytesMessage) returns (OracleReward) {
+  };
+
   rpc GetBrokerageInfo (BytesMessage) returns (NumberMessage) {
   };
 
@@ -775,6 +780,12 @@ service Wallet {
   rpc CreateCommonTransaction (Transaction) returns (TransactionExtention) {
   };
 
+  rpc UnjailWitness (UnjailWitnessContract) returns (TransactionExtention) {
+  };
+
+  rpc GetWitnessMissCount (BytesMessage) returns (NumberMessage) {
+  };
+
   rpc GetTransactionInfoByBlockNum (NumberMessage) returns (TransactionInfoList) {
   }
 
@@ -788,6 +799,50 @@ service Wallet {
   }
 
   rpc GetPendingSize (EmptyMessage) returns (NumberMessage) {
+  }
+
+  rpc DelegateFeedConsent (DelegateFeedConsentContract) returns (TransactionExtention) {
+    option (google.api.http) = {
+      post: "/wallet/delegatefeedconsent"
+      body: "*"
+      additional_bindings {
+        get: "/wallet/delegatefeedconsent"
+      }
+    };
+  }
+
+  rpc OracleExchangeRateVote (OracleExchangeRateVoteContract) returns (TransactionExtention) {
+    option (google.api.http) = {
+      post: "/wallet/oracleexchangeratevote"
+      body: "*"
+      additional_bindings {
+        get: "/wallet/oracleexchangeratevote"
+      }
+    };
+  }
+
+  rpc CreateStableMarketExchange (StableMarketExchangeContract) returns (TransactionExtention) {
+  }
+
+  rpc GetStableCoinById (BytesMessage) returns (StableCoinInfo) {
+  }
+
+  rpc GetStableCoinList (EmptyMessage) returns (StableCoinInfoList){
+  }
+
+  rpc GetMinSpread (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetBasePoolSize (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetPoolDelta (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetPoolRecoveryPeriod (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetSimulateSwap (StableMarketExchangeContract) returns (ExchangeResult) {
   }
 };
 
@@ -948,6 +1003,9 @@ service WalletSolidity {
   rpc GetRewardInfo (BytesMessage) returns (NumberMessage) {
   };
 
+  rpc GetOracleRewardInfo (BytesMessage) returns (OracleReward) {
+  };
+
   rpc GetBrokerageInfo (BytesMessage) returns (NumberMessage) {
   };
 
@@ -973,6 +1031,24 @@ service WalletSolidity {
   }
 
   rpc GetBurnTrx (EmptyMessage) returns (NumberMessage) {
+  }
+
+  rpc GetStableCoinById (BytesMessage) returns (StableCoinInfo) {
+  }
+
+  rpc GetStableCoinList (EmptyMessage) returns (StableCoinInfoList){
+  }
+
+  rpc GetMinSpread (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetBasePoolSize (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetPoolRecoveryPeriod (EmptyMessage) returns (BytesMessage) {
+  }
+
+  rpc GetSimulateSwap (StableMarketExchangeContract) returns (ExchangeResult) {
   }
 };
 

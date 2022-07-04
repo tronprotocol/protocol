@@ -28,6 +28,8 @@ message Vote {
   bytes vote_address = 1;
   // the vote num to this super rep.
   int64 vote_count = 2;
+  // the share num to this super rep.
+  int64 shares = 3;
 }
 
 // Proposal
@@ -126,6 +128,43 @@ message ChainParameters {
     int64 value = 2;
   }
 }
+/**
+ stable-coin
+ */
+
+message OracleReward {
+  // the trx balance
+  int64 balance = 1;
+  // the other asset owned by this pool，key is assetId
+  map<string, int64> asset = 2;
+}
+
+message DecOracleReward {
+  // the trx balance
+  BigInt balance = 1;
+  // the other asset owned by this pool，key is assetId
+  map<string, BigInt> asset = 2;
+}
+
+message BigInt {
+  bytes data = 1;
+}
+
+message OraclePrevote {
+  bytes hash = 1;
+  int64 blockNum = 2;
+}
+
+message OracleVote {
+  string salt = 1;
+  // [assetID:trxExchangeRate,]assetID:trxExchangeRate
+  string exchangeRates = 2;
+}
+
+
+/**
+ stable-coin
+ */
 
 /* Account */
 message Account {
@@ -214,6 +253,8 @@ message Account {
   Permission owner_permission = 31;
   Permission witness_permission = 32;
   repeated Permission active_permission = 33;
+  OracleReward oracle_allowance = 61;
+  int64 slashed_votes = 62;
 }
 
 message Key {
@@ -261,6 +302,8 @@ message Witness {
   int64 latestBlockNum = 7;
   int64 latestSlotNum = 8;
   bool isJobs = 9;
+  int64 totalShares = 10;
+  int64 jailed_height = 11;
 }
 
 // Vote Change
@@ -346,6 +389,10 @@ message Transaction {
       ShieldedTransferContract = 51;
       MarketSellAssetContract = 52;
       MarketCancelOrderContract = 53;
+      DelegateFeedConsentContract = 54;
+      OracleExchangeRateVoteContract = 55;
+      UnjailWitnessContract = 56;
+      StableMarketExchangeContract = 57;
     }
     ContractType type = 1;
     google.protobuf.Any parameter = 2;
@@ -393,6 +440,8 @@ message Transaction {
 
     bytes orderId = 25;
     repeated MarketOrderDetail orderDetails = 26;
+    map<string, int64> withdraw_asset = 27;
+    int64 slash_amount = 28;
   }
 
   message raw {
@@ -451,6 +500,8 @@ message TransactionInfo {
   bytes orderId = 25;
   repeated MarketOrderDetail orderDetails = 26;
   int64 packingFee = 27;
+  int64 slash_amount = 28;
+
 }
 
 message TransactionRet {
