@@ -321,6 +321,7 @@ message ResourceReceipt {
   int64 net_usage = 5;
   int64 net_fee = 6;
   Transaction.Result.contractResult result = 7;
+  int64 energy_penalty_total = 8;
 }
 
 message MarketOrderDetail {
@@ -580,7 +581,7 @@ enum ReasonCode {
   TOO_MANY_PEERS = 0x04;
   DUPLICATE_PEER = 0x05;
   INCOMPATIBLE_PROTOCOL = 0x06;
-  NULL_IDENTITY = 0x07;
+  RANDOM_ELIMINATION = 0x07;
   PEER_QUITING = 0x08;
   UNEXPECTED_IDENTITY = 0x09;
   LOCAL_IDENTITY = 0x0A;
