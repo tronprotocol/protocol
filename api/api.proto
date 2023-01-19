@@ -17,7 +17,7 @@ import "core/contract/shield_contract.proto";
 
 option java_package = "org.tron.api"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "GrpcAPI"; //Specify the class name of the generated Java file
-option go_package = "github.com/tronprotocol/grpc-gateway/api";
+option go_package = "github.com/tronprotocol/protocol/blob/master/api";
 
 service Wallet {
 
@@ -94,7 +94,6 @@ service Wallet {
       }
     };
   };
-
 
   rpc SetAccountId (SetAccountIdContract) returns (Transaction) {
     option (google.api.http) = {
@@ -496,7 +495,6 @@ service Wallet {
     };
   };
 
-
   rpc GetDelegatedResource (DelegatedResourceMessage) returns (DelegatedResourceList) {
   };
 
@@ -708,15 +706,12 @@ service Wallet {
   }
 
   rpc AddSign (TransactionSign) returns (TransactionExtention) {
-
   }
 
   rpc GetTransactionSignWeight (Transaction) returns (TransactionSignWeight) {
-
   }
 
   rpc GetTransactionApprovedList (Transaction) returns (TransactionApprovedList) {
-
   }
 
   rpc GetNodeInfo (EmptyMessage) returns (NodeInfo) {
@@ -729,7 +724,6 @@ service Wallet {
   };
 
   rpc UpdateBrokerage (UpdateBrokerageContract) returns (TransactionExtention) {
-
   };
 
   // for shiededTransaction
@@ -1072,16 +1066,15 @@ service WalletExtension {
 service Database {
   // for tapos
   rpc getBlockReference (EmptyMessage) returns (BlockReference) {
-
   }
+  
   rpc GetDynamicProperties (EmptyMessage) returns (DynamicProperties) {
-
   }
+  
   rpc GetNowBlock (EmptyMessage) returns (Block) {
-
   }
+  
   rpc GetBlockByNum (NumberMessage) returns (Block) {
-
   }
 };
 
