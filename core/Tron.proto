@@ -132,7 +132,7 @@ message ChainParameters {
 message Account {
   /* frozen balance */
   message Frozen {
-    int64 frozen_balance = 1; // the frozen trx balance
+    int64 frozen_balance = 1; // the frozen trx or asset balance
     int64 expire_time = 2; // the expire time
   }
   // account nick name
@@ -407,6 +407,7 @@ message Transaction {
       UNKNOWN = 13;
       TRANSFER_FAILED = 14;
       INVALID_CODE = 15;
+      // please fill in the order according to the serial number
     }
     int64 fee = 1;
     code ret = 2;
