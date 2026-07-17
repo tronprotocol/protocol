@@ -27,7 +27,7 @@
         message Vote {     
            bytes vote_address = 1;     
            int64 vote_count = 2;   }   
-        bytes accout_name = 1;   
+        bytes account_name = 1;   
         AccountType type = 2;   
         bytes address = 3;   
         int64 balance = 4;   
@@ -80,7 +80,7 @@
      `parentHash`: the hash of last block – e.g. “_7dacsa…3ed_.”  
      `number`: the height of this block – e.g. _13534657_.  
      `witness_id`: the id of witness which packed this block – e.g. “_0xu82h…7237_”.  
-     `witness_address`: the adresss of the witness packed this block – e.g. “_0xu82h…7237_”.
+     `witness_address`: the address of the witness packed this block – e.g. “_0xu82h…7237_”.
 
          message BlockHeader {   
            message raw {     
@@ -127,7 +127,7 @@
            bytes owner_address = 3; 
           }
           
-     A `AccountUpdateContract` contains 2 paremeters:  
+     A `AccountUpdateContract` contains 2 parameters:  
      `account_name`: the name for this account – e.g.”_Billsaccount_”.  
      `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
      
@@ -278,7 +278,7 @@ Input, transaction and head block all require signature.
     `TransactionType` have two types: `UtxoType` and `ContractType`.
 
         message Transaction {   
-          enum TranscationType {     
+          enum TransactionType {     
             UtxoType = 0;     
             ContractType = 1;   
            }   
@@ -299,7 +299,7 @@ Input, transaction and head block all require signature.
               google.protobuf.Any parameter = 2;   
             }   
             message raw {     
-              TranscationType type = 2;     
+              TransactionType type = 2;     
               repeated TXInput vin = 5;     
               repeated TXOutput vout = 7;     
               int64 expiration = 8;     
@@ -355,7 +355,7 @@ Input, transaction and head block all require signature.
      
         message Result {
           enum code {
-            SUCESS = 0;
+            SUCCESS = 0;
             FAILED = 1;
           }
           int64 fee = 1;
@@ -434,7 +434,7 @@ Input, transaction and head block all require signature.
      `ids`: the identification of block.  
      `type`: what type of the block.
     
-     `ids` contains 2 paremeters:  
+     `ids` contains 2 parameters:  
      `hash`: the hash of block.  
      `number`: the hash and height of block.
       
@@ -457,7 +457,7 @@ Input, transaction and head block all require signature.
      `DUPLICATE_PEER`  
      `INCOMPATIBLE_PROTOCOL`  
      `RANDOM_ELIMINATION`  
-     `PEER_QUITING`  
+     `PEER_QUITTING`  
      `UNEXPECTED_IDENTITY`  
      `LOCAL_IDENTITY`  
      `PING_TIMEOUT`  
@@ -474,7 +474,7 @@ Input, transaction and head block all require signature.
           DUPLICATE_PEER = 5;
           INCOMPATIBLE_PROTOCOL = 6;
           RANDOM_ELIMINATION = 7;
-          PEER_QUITING = 8;
+          PEER_QUITTING = 8;
           UNEXPECTED_IDENTITY = 9;
           LOCAL_IDENTITY = 10;
           PING_TIMEOUT = 11;
@@ -615,7 +615,7 @@ Input, transaction and head block all require signature.
         }
       };
    
-   `AccountList`: the list of acounts in the blockchain explorer.  
+   `AccountList`: the list of accounts in the blockchain explorer.  
    message `AccountList` contains one parameter:  
    `account`:
    

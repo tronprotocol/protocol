@@ -43,7 +43,7 @@ message SmartContract {
       bool payable = 7;
       StateMutabilityType stateMutability = 8;
     }
-    repeated Entry entrys = 1;
+    repeated Entry entries = 1;
   }
   bytes origin_address = 1;
   bytes contract_address = 2;

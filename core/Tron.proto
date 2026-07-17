@@ -166,7 +166,7 @@ message Account {
   // this account create time
   int64 create_time = 0x09;
   // this last operation time, including transfer, voting and so on. //FIXME fix grammar
-  int64 latest_opration_time = 10;
+  int64 latest_operation_time = 10;
   // witness block producing allowance
   int64 allowance = 0x0B;
   // last withdraw time
@@ -293,7 +293,7 @@ message Votes {
   repeated Vote new_votes = 3;
 }
 
-// Transcation
+// Transaction
 
 message TXOutput {
   int64 value = 1;
@@ -386,7 +386,7 @@ message Transaction {
 
   message Result {
     enum code {
-      SUCESS = 0;
+      SUCCESS = 0;
       FAILED = 1;
     }
     enum contractResult {
@@ -445,14 +445,14 @@ message Transaction {
   }
 
   raw raw_data = 1;
-  // only support size = 1,  repeated list here for muti-sig extension
+  // only support size = 1,  repeated list here for multi-sig extension
   repeated bytes signature = 2;
   repeated Result ret = 5;
 }
 
 message TransactionInfo {
   enum code {
-    SUCESS = 0;
+    SUCCESS = 0;
     FAILED = 1;
   }
   message Log {
@@ -582,7 +582,7 @@ enum ReasonCode {
   DUPLICATE_PEER = 0x05;
   INCOMPATIBLE_PROTOCOL = 0x06;
   RANDOM_ELIMINATION = 0x07;
-  PEER_QUITING = 0x08;
+  PEER_QUITTING = 0x08;
   UNEXPECTED_IDENTITY = 0x09;
   LOCAL_IDENTITY = 0x0A;
   PING_TIMEOUT = 0x0B;
@@ -635,7 +635,7 @@ message InternalTransaction {
   bytes hash = 1;
   // the one send trx (TBD: or token) via function
   bytes caller_address = 2;
-  // the one recieve trx (TBD: or token) via function
+  // the one receive trx (TBD: or token) via function
   bytes transferTo_address = 3;
   message CallValueInfo {
     // trx (TBD: or token) value

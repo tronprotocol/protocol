@@ -27,7 +27,7 @@
         bytes vote_address = 1;     
         int64 vote_count = 2;   
        }   
-       bytes accout_name = 1;   
+       bytes account_name = 1;   
        AccountType type = 2;   
        bytes address = 3;   
        int64 balance = 4;   
@@ -253,7 +253,7 @@
     
     message Result {
       enum code {
-        SUCESS = 0;
+        SUCCESS = 0;
         FAILED = 1;
        }
        int64 fee = 1;
@@ -285,7 +285,7 @@
    `TransactionType`包括`UtxoType`和`ContractType`。
 
     message Transaction {   
-      enum TranscationType {     
+      enum TransactionType {     
         UtxoType = 0;     
         ContractType = 1;   
        }   
@@ -304,7 +304,7 @@
           google.protobuf.Any parameter = 2;  
         }   
         message raw {     
-          TranscationType type = 2;     
+          TransactionType type = 2;     
           repeated TXInput vin = 5;     
           repeated TXOutput vout = 7;     
           int64 expiration = 8;     
@@ -443,7 +443,7 @@
    `DUPLICATE_PEER`  
    `INCOMPATIBLE_PROTOCOL`  
    `RANDOM_ELIMINATION`  
-   `PEER_QUITING`  
+   `PEER_QUITTING`  
    `UNEXPECTED_IDENTITY`  
    `LOCAL_IDENTITY`  
    `PING_TIMEOU`  
@@ -460,7 +460,7 @@
         DUPLICATE_PEER = 5;
         INCOMPATIBLE_PROTOCOL = 6;
         RANDOM_ELIMINATION = 7;
-        PEER_QUITING = 8;
+        PEER_QUITTING = 8;
         UNEXPECTED_IDENTITY = 9;
         LOCAL_IDENTITY = 10;
         PING_TIMEOUT = 11;
